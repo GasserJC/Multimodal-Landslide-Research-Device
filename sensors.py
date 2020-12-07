@@ -28,10 +28,10 @@ def cleanAndExit():
     sys.exit()
 
 #Asynchronous function to write to the cloud database
-async def SendToDB( WeightValue ):
+async def SendToDB(WeightValue):
     #JSON object with one key value pair, Grams => (sensor weight)
     data = { 
-        u'Grams': WeightValue
+        u'Weight': WeightValue
     }
     db.collection(u'SensorData').document(str(datetime.now())).set(data) #Write into the database
 
@@ -71,7 +71,8 @@ while True:
         hx.power_up()
 
         #Asynchronously write to the data base with the newest scale value.
-        asyncio.run(SendToDB(str((a+b+c)/3)))
+        if(a*b*c != 0):
+            asyncio.run(SendToDB(str((a+b+c)/3)))
         time.sleep(1.25)
         
     except (KeyboardInterrupt, SystemExit):
