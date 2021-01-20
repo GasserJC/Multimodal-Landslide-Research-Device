@@ -11,6 +11,8 @@ from datetime import datetime
 import asyncio
 import PySense
 
+#testing 2
+
 cred = credentials.Certificate('creds.json') #need IAM credentials file.
 firebase_admin.initialize_app(cred)
 db = firestore.client()
